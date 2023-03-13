@@ -24,9 +24,9 @@
 //  
 
 import UIKit
-import SugarKit
 import Combine
 import Kingfisher
+import EverythingAtOnce
 
 // MARK: - View
 

@@ -124,7 +124,6 @@ opt_in_rules: # some rules are only opt-in
 - type_contents_order # Specifies the order of subtypes, properties, methods & more within a type.
 - unneeded_break_in_switch # Avoid using unneeded break statements.
 - unused_capture_list # Unused reference in a capture list should be removed.
-- unused_declaration # Declarations should be referenced at least once within all files linted.
 - unused_enumerated # When the index or the item is not used, .enumerated() can be removed.
 - unused_optional_binding # Prefer != nil over let _ =
 - unused_setter_value # Setter value is not used.

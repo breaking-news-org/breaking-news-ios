@@ -14,7 +14,6 @@
 		33054CCB299C1F8A00231242 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CCA299C1F8A00231242 /* BaseViewController.swift */; };
 		33054CD0299C222A00231242 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CCF299C222A00231242 /* BaseView.swift */; };
 		33054CD3299C231700231242 /* EverythingAtOnce in Frameworks */ = {isa = PBXBuildFile; productRef = 33054CD2299C231700231242 /* EverythingAtOnce */; };
-		33054CD6299C233A00231242 /* SugarKit in Frameworks */ = {isa = PBXBuildFile; productRef = 33054CD5299C233A00231242 /* SugarKit */; };
 		33054CDC299C260000231242 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 33054CDB299C260000231242 /* RealmSwift */; };
 		33054CDF299C264500231242 /* UIFont+primary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CDE299C264500231242 /* UIFont+primary.swift */; };
 		33054CE1299C266B00231242 /* UIFont+medium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CE0299C266B00231242 /* UIFont+medium.swift */; };
@@ -32,8 +31,6 @@
 		33054D04299CDD2100231242 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D03299CDD2100231242 /* APIService.swift */; };
 		33054D0A299CDE4900231242 /* NetworkServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D09299CDE4900231242 /* NetworkServiceDelegate.swift */; };
 		33054D0C299CDE9200231242 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D0B299CDE9200231242 /* NetworkServiceProtocol.swift */; };
-		33054D0F299CF0FF00231242 /* Lorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D0E299CF0FF00231242 /* Lorem.swift */; };
-		33054D11299CF10400231242 /* Picsum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D10299CF10400231242 /* Picsum.swift */; };
 		33054D13299CF26800231242 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D12299CF26800231242 /* NewsListViewController.swift */; };
 		33054D15299CF26E00231242 /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D14299CF26E00231242 /* NewsListView.swift */; };
 		33054D17299CF27600231242 /* NewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D16299CF27600231242 /* NewsListViewModel.swift */; };
@@ -69,7 +66,6 @@
 		33526E74299E7B68008A6A91 /* NewsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E73299E7B68008A6A91 /* NewsListCell.swift */; };
 		33526E76299E7B83008A6A91 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E75299E7B83008A6A91 /* BaseTableViewCell.swift */; };
 		33526E78299E831A008A6A91 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E77299E831A008A6A91 /* APIEndpoint.swift */; };
-		33526E7B299E855E008A6A91 /* SpicyWrap in Frameworks */ = {isa = PBXBuildFile; productRef = 33526E7A299E855E008A6A91 /* SpicyWrap */; };
 		33526E7E299E869A008A6A91 /* UserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E7D299E869A008A6A91 /* UserServiceProtocol.swift */; };
 		33526E80299E86A0008A6A91 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E7F299E86A0008A6A91 /* UserService.swift */; };
 		3397FEB729A5612C009E4325 /* DateDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3397FEB629A5612C009E4325 /* DateDifference.swift */; };
@@ -121,8 +117,6 @@
 		33054D03299CDD2100231242 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		33054D09299CDE4900231242 /* NetworkServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceDelegate.swift; sourceTree = "<group>"; };
 		33054D0B299CDE9200231242 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
-		33054D0E299CF0FF00231242 /* Lorem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lorem.swift; sourceTree = "<group>"; };
-		33054D10299CF10400231242 /* Picsum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picsum.swift; sourceTree = "<group>"; };
 		33054D12299CF26800231242 /* NewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
 		33054D14299CF26E00231242 /* NewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
 		33054D16299CF27600231242 /* NewsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewModel.swift; sourceTree = "<group>"; };
@@ -192,13 +186,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				33054D24299D219D00231242 /* XCoordinator in Frameworks */,
-				33526E7B299E855E008A6A91 /* SpicyWrap in Frameworks */,
 				33054CED299C2C7400231242 /* Kingfisher in Frameworks */,
 				33054CF8299CDB1F00231242 /* Reachability in Frameworks */,
 				33054CDC299C260000231242 /* RealmSwift in Frameworks */,
 				33526E5E299E55DB008A6A91 /* GoogleSignIn in Frameworks */,
 				33054CF5299CDAB800231242 /* Moya in Frameworks */,
-				33054CD6299C233A00231242 /* SugarKit in Frameworks */,
 				33054CD3299C231700231242 /* EverythingAtOnce in Frameworks */,
 				33054CF2299CD99C00231242 /* SkeletonView in Frameworks */,
 			);
@@ -239,7 +231,6 @@
 				33054CC7299C1F6400231242 /* screen */,
 				33054CE4299C26A700231242 /* service */,
 				33054CC8299C1F6B00231242 /* ui */,
-				33054CEA299C278D00231242 /* utils */,
 			);
 			path = "breaking-news-ios";
 			sourceTree = "<group>";
@@ -322,10 +313,8 @@
 			isa = PBXGroup;
 			children = (
 				33526E60299E6ACE008A6A91 /* display */,
+				3397FEC529A64F11009E4325 /* helper */,
 				33526E5F299E6AC7008A6A91 /* persistent */,
-				3397FEB629A5612C009E4325 /* DateDifference.swift */,
-				33054D37299D55C500231242 /* NewsFilter.swift */,
-				33054D39299D56E300231242 /* NewsSort.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -361,14 +350,6 @@
 				33054CE8299C276000231242 /* DatabaseProtocol.swift */,
 			);
 			path = database;
-			sourceTree = "<group>";
-		};
-		33054CEA299C278D00231242 /* utils */ = {
-			isa = PBXGroup;
-			children = (
-				33054D0D299CF0F600231242 /* generators */,
-			);
-			path = utils;
 			sourceTree = "<group>";
 		};
 		33054CF9299CDC1900231242 /* newsList */ = {
@@ -430,15 +411,6 @@
 				33054D35299D558900231242 /* NewsServiceProtocol.swift */,
 			);
 			path = news;
-			sourceTree = "<group>";
-		};
-		33054D0D299CF0F600231242 /* generators */ = {
-			isa = PBXGroup;
-			children = (
-				33054D0E299CF0FF00231242 /* Lorem.swift */,
-				33054D10299CF10400231242 /* Picsum.swift */,
-			);
-			path = generators;
 			sourceTree = "<group>";
 		};
 		33054D25299D21C200231242 /* navigation */ = {
@@ -609,6 +581,16 @@
 			path = helper;
 			sourceTree = "<group>";
 		};
+		3397FEC529A64F11009E4325 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				3397FEB629A5612C009E4325 /* DateDifference.swift */,
+				33054D37299D55C500231242 /* NewsFilter.swift */,
+				33054D39299D56E300231242 /* NewsSort.swift */,
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
 		33B9BFDA299FE065003B2303 /* subview */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,7 +649,6 @@
 			name = "breaking-news-ios";
 			packageProductDependencies = (
 				33054CD2299C231700231242 /* EverythingAtOnce */,
-				33054CD5299C233A00231242 /* SugarKit */,
 				33054CDB299C260000231242 /* RealmSwift */,
 				33054CEC299C2C7400231242 /* Kingfisher */,
 				33054CF1299CD99C00231242 /* SkeletonView */,
@@ -675,7 +656,6 @@
 				33054CF7299CDB1F00231242 /* Reachability */,
 				33054D23299D219D00231242 /* XCoordinator */,
 				33526E5D299E55DB008A6A91 /* GoogleSignIn */,
-				33526E7A299E855E008A6A91 /* SpicyWrap */,
 			);
 			productName = "breaking-news-ios";
 			productReference = 33054CAE299C1EB900231242 /* breaking-news-ios.app */;
@@ -707,7 +687,6 @@
 			mainGroup = 33054CA5299C1EB900231242;
 			packageReferences = (
 				33054CD1299C231700231242 /* XCRemoteSwiftPackageReference "everything-at-once" */,
-				33054CD4299C233900231242 /* XCRemoteSwiftPackageReference "sugar-kit" */,
 				33054CDA299C260000231242 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				33054CEB299C2C7400231242 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				33054CF0299CD99C00231242 /* XCRemoteSwiftPackageReference "SkeletonView" */,
@@ -715,7 +694,6 @@
 				33054CF6299CDB1E00231242 /* XCRemoteSwiftPackageReference "Reachability" */,
 				33054D22299D219D00231242 /* XCRemoteSwiftPackageReference "XCoordinator" */,
 				33526E59299E55B2008A6A91 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				33526E79299E855E008A6A91 /* XCRemoteSwiftPackageReference "spicy-wrap" */,
 			);
 			productRefGroup = 33054CAF299C1EB900231242 /* Products */;
 			projectDirPath = "";
@@ -808,7 +786,6 @@
 				33054D3D299E0E7500231242 /* DateFormatters.swift in Sources */,
 				33054D2C299D258000231242 /* XCoordinator+transitions.swift in Sources */,
 				33054CD0299C222A00231242 /* BaseView.swift in Sources */,
-				33054D0F299CF0FF00231242 /* Lorem.swift in Sources */,
 				33054D34299D518000231242 /* URL+FailableCustomPersistable.swift in Sources */,
 				33054D2F299D25EB00231242 /* Animation+fade.swift in Sources */,
 				33054D21299D20FC00231242 /* NewsDetailsViewModelProtocol.swift in Sources */,
@@ -843,7 +820,6 @@
 				3397FEC229A61D8D009E4325 /* NewsSort+queryItems.swift in Sources */,
 				33526E7E299E869A008A6A91 /* UserServiceProtocol.swift in Sources */,
 				33B9C00629A0DE95003B2303 /* Fonts.swift in Sources */,
-				33054D11299CF10400231242 /* Picsum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1075,14 +1051,6 @@
 				kind = branch;
 			};
 		};
-		33054CD4299C233900231242 /* XCRemoteSwiftPackageReference "sugar-kit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/whutao/sugar-kit";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		33054CDA299C260000231242 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -1139,14 +1107,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		33526E79299E855E008A6A91 /* XCRemoteSwiftPackageReference "spicy-wrap" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/whutao/spicy-wrap";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1154,11 +1114,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33054CD1299C231700231242 /* XCRemoteSwiftPackageReference "everything-at-once" */;
 			productName = EverythingAtOnce;
-		};
-		33054CD5299C233A00231242 /* SugarKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 33054CD4299C233900231242 /* XCRemoteSwiftPackageReference "sugar-kit" */;
-			productName = SugarKit;
 		};
 		33054CDB299C260000231242 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1194,11 +1149,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33526E59299E55B2008A6A91 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
-		};
-		33526E7A299E855E008A6A91 /* SpicyWrap */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 33526E79299E855E008A6A91 /* XCRemoteSwiftPackageReference "spicy-wrap" */;
-			productName = SpicyWrap;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

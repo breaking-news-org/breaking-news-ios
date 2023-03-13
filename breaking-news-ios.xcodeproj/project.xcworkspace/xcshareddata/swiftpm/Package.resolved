@@ -24,7 +24,7 @@
       "location" : "https://github.com/whutao/everything-at-once",
       "state" : {
         "branch" : "master",
-        "revision" : "125b283ec8ad2d88c9388347f4a659d9d0ee0328"
+        "revision" : "25c6a1fa8c55dd5f736f728709455c4c90f54159"
       }
     },
     {
@@ -124,24 +124,6 @@
       "state" : {
         "revision" : "739a4f5d78731bebc48811c75fa9e1f4c4cef23e",
         "version" : "1.30.4"
-      }
-    },
-    {
-      "identity" : "spicy-wrap",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/whutao/spicy-wrap",
-      "state" : {
-        "branch" : "master",
-        "revision" : "05663aed4b29afc5cdc4be84e01c59150c92e22d"
-      }
-    },
-    {
-      "identity" : "sugar-kit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/whutao/sugar-kit",
-      "state" : {
-        "branch" : "master",
-        "revision" : "bd7e1506e648dbabf5cd1d4894f87309f45697c8"
       }
     },
     {

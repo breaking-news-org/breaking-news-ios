@@ -25,7 +25,6 @@
 
 import UIKit
 import EverythingAtOnce
-import SugarKit
 
 // MARK: - View
 

@@ -24,6 +24,7 @@
 //  
 
 import Foundation
+import EverythingAtOnce
 
 #if DEBUG
 extension NewsDisplayModel {

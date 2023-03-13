@@ -24,8 +24,8 @@
 //  
 
 import UIKit
-import SugarKit
 import Kingfisher
+import EverythingAtOnce
 
 // MARK: - Subview
 

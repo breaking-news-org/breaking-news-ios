@@ -24,7 +24,7 @@
 //  
 
 import UIKit
-import SugarKit
+import EverythingAtOnce
 
 // MARK: - Delegate
 
@@ -34,7 +34,7 @@ import SugarKit
 		_ application: UIApplication,
 		didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
 	) -> Bool {
-		SugarKit.configure()
+		EverythingAtOnceDeclarativeLayout.configure()
 		return true
 	}
 
