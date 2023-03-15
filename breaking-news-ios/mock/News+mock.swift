@@ -24,7 +24,6 @@
 //  
 
 import Foundation
-import RealmSwift
 import EverythingAtOnce
 
 // MARK: - Extension
@@ -49,11 +48,11 @@ extension News {
 		return News(
 			id: UUID().uuidString.lowercased(),
 			creator: Lorem.fullname,
-			creationDate: Date().addingTimeInterval(.random(in: -7_000...0)),
+			creationDate: Date().addingTimeInterval(.random(in: -3_000...50)),
 			title: Lorem.sentence(ofLength: 5),
-			text: parameters.contains(.text) ? Lorem.paragraph : nil,
+			text: parameters.contains(.text) ? [Lorem.paragraph, Lorem.paragraph, Lorem.paragraph].joined(separator: "\n\n") : nil,
 			category: parameters.contains(.category) ? Lorem.word : nil,
-			imageUrls: parameters.contains(.images) ? [Picsum.random200x200(), Picsum.random200x200()] : [],
+			imageUrls: parameters.contains(.images) ? [Picsum.random800x600(), Picsum.random800x600()] : [],
 			isPublished: [true, false, nil].randomElement()!
 		)
 	}

@@ -36,6 +36,7 @@ internal enum Asset {
     internal static let pantone = ColorAsset(name: "Pantone")
   }
   internal enum Images {
+    internal static let backArrow = ImageAsset(name: "back_arrow")
     internal static let calendar = ImageAsset(name: "calendar")
     internal static let clock = ImageAsset(name: "clock")
     internal static let edit = ImageAsset(name: "edit")

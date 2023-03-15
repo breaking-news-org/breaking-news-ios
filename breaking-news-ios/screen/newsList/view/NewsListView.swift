@@ -301,6 +301,10 @@ extension NewsListView: UITextFieldDelegate {
 		_searchEditingEnd.send()
 	}
 
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.endEditing(true)
+	}
+
 	func textField(
 		_ textField: UITextField,
 		shouldChangeCharactersIn range: NSRange,
@@ -342,13 +346,13 @@ import SwiftUI
 struct NewsListView_Preview: PreviewProvider {
 
 	private static let models: [NewsDisplayModel] = [
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.images, .text]),
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.text, .category]),
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.text])
-	]
+		News.randomMock(parameters: .all),
+		News.randomMock(parameters: [.images, .text]),
+		News.randomMock(parameters: .all),
+		News.randomMock(parameters: [.text, .category]),
+		News.randomMock(parameters: .all),
+		News.randomMock(parameters: [.text])
+	].map(NewsDisplayModel.init(from:))
 
 	static var previews: some View {
 		UIViewPreview {

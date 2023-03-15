@@ -68,10 +68,18 @@ final class AppRouter: NavigationCoordinator<AppRoute> {
 				viewModel: viewModel
 			)
 			return .push(viewController)
-		case .newsDetails:
-			return .none()
+		case let .newsDetails(news):
+			let viewModel = NewsDetailsViewModel(
+				router: unownedRouter,
+				networkService: Service.network,
+				news: news
+			)
+			let viewController = NewsDetailsViewController(
+				viewModel: viewModel
+			)
+			return .push(viewController)
 		case .back:
-			return .none()
+			return .pop()
 		}
 	}
 

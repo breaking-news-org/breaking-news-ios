@@ -14,7 +14,6 @@
 		33054CCB299C1F8A00231242 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CCA299C1F8A00231242 /* BaseViewController.swift */; };
 		33054CD0299C222A00231242 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CCF299C222A00231242 /* BaseView.swift */; };
 		33054CD3299C231700231242 /* EverythingAtOnce in Frameworks */ = {isa = PBXBuildFile; productRef = 33054CD2299C231700231242 /* EverythingAtOnce */; };
-		33054CDC299C260000231242 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 33054CDB299C260000231242 /* RealmSwift */; };
 		33054CDF299C264500231242 /* UIFont+primary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CDE299C264500231242 /* UIFont+primary.swift */; };
 		33054CE1299C266B00231242 /* UIFont+medium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CE0299C266B00231242 /* UIFont+medium.swift */; };
 		33054CE3299C268200231242 /* UIFont+bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054CE2299C268200231242 /* UIFont+bold.swift */; };
@@ -42,7 +41,6 @@
 		33054D2C299D258000231242 /* XCoordinator+transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D2B299D258000231242 /* XCoordinator+transitions.swift */; };
 		33054D2F299D25EB00231242 /* Animation+fade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D2E299D25EB00231242 /* Animation+fade.swift */; };
 		33054D31299D266A00231242 /* Animation+modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D30299D266A00231242 /* Animation+modal.swift */; };
-		33054D34299D518000231242 /* URL+FailableCustomPersistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D33299D518000231242 /* URL+FailableCustomPersistable.swift */; };
 		33054D36299D558900231242 /* NewsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D35299D558900231242 /* NewsServiceProtocol.swift */; };
 		33054D38299D55C500231242 /* NewsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D37299D55C500231242 /* NewsFilter.swift */; };
 		33054D3A299D56E300231242 /* NewsSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33054D39299D56E300231242 /* NewsSort.swift */; };
@@ -63,7 +61,6 @@
 		33526E68299E7042008A6A91 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E67299E7042008A6A91 /* BaseButton.swift */; };
 		33526E6B299E71AE008A6A91 /* RoundedRectanglePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E6A299E71AE008A6A91 /* RoundedRectanglePath.swift */; };
 		33526E6D299E721D008A6A91 /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E6C299E721D008A6A91 /* CapsuleButton.swift */; };
-		33526E6F299E743D008A6A91 /* NewsDisplayModel+mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E6E299E743D008A6A91 /* NewsDisplayModel+mock.swift */; };
 		33526E74299E7B68008A6A91 /* NewsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E73299E7B68008A6A91 /* NewsListCell.swift */; };
 		33526E76299E7B83008A6A91 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E75299E7B83008A6A91 /* BaseTableViewCell.swift */; };
 		33526E78299E831A008A6A91 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33526E77299E831A008A6A91 /* APIEndpoint.swift */; };
@@ -131,7 +128,6 @@
 		33054D2B299D258000231242 /* XCoordinator+transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCoordinator+transitions.swift"; sourceTree = "<group>"; };
 		33054D2E299D25EB00231242 /* Animation+fade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+fade.swift"; sourceTree = "<group>"; };
 		33054D30299D266A00231242 /* Animation+modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+modal.swift"; sourceTree = "<group>"; };
-		33054D33299D518000231242 /* URL+FailableCustomPersistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+FailableCustomPersistable.swift"; sourceTree = "<group>"; };
 		33054D35299D558900231242 /* NewsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsServiceProtocol.swift; sourceTree = "<group>"; };
 		33054D37299D55C500231242 /* NewsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFilter.swift; sourceTree = "<group>"; };
 		33054D39299D56E300231242 /* NewsSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSort.swift; sourceTree = "<group>"; };
@@ -151,7 +147,6 @@
 		33526E67299E7042008A6A91 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		33526E6A299E71AE008A6A91 /* RoundedRectanglePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectanglePath.swift; sourceTree = "<group>"; };
 		33526E6C299E721D008A6A91 /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
-		33526E6E299E743D008A6A91 /* NewsDisplayModel+mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsDisplayModel+mock.swift"; sourceTree = "<group>"; };
 		33526E73299E7B68008A6A91 /* NewsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListCell.swift; sourceTree = "<group>"; };
 		33526E75299E7B83008A6A91 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		33526E77299E831A008A6A91 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
@@ -196,7 +191,6 @@
 				33054D24299D219D00231242 /* XCoordinator in Frameworks */,
 				33054CED299C2C7400231242 /* Kingfisher in Frameworks */,
 				33054CF8299CDB1F00231242 /* Reachability in Frameworks */,
-				33054CDC299C260000231242 /* RealmSwift in Frameworks */,
 				33526E5E299E55DB008A6A91 /* GoogleSignIn in Frameworks */,
 				33054CF5299CDAB800231242 /* Moya in Frameworks */,
 				33054CD3299C231700231242 /* EverythingAtOnce in Frameworks */,
@@ -310,7 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				33054D2D299D25D300231242 /* Animation */,
-				33054D32299D517600231242 /* FailableCustomPersistable */,
 				33054D2A299D256D00231242 /* Transition */,
 				33054CDD299C263900231242 /* UIFont */,
 			);
@@ -365,10 +358,9 @@
 		33054CFA299CDC2300231242 /* newsDetails */ = {
 			isa = PBXGroup;
 			children = (
-				33054D1A299D20AB00231242 /* NewsDetailsView.swift */,
-				33054D1C299D20EE00231242 /* NewsDetailsViewController.swift */,
-				33054D1E299D20F400231242 /* NewsDetailsViewModel.swift */,
-				33054D20299D20FC00231242 /* NewsDetailsViewModelProtocol.swift */,
+				33C0C9CF29C269F7005ABD50 /* controller */,
+				33C0C9CE29C269F3005ABD50 /* view */,
+				33C0C9D029C269FC005ABD50 /* viewModel */,
 			);
 			path = newsDetails;
 			sourceTree = "<group>";
@@ -439,14 +431,6 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
-		33054D32299D517600231242 /* FailableCustomPersistable */ = {
-			isa = PBXGroup;
-			children = (
-				33054D33299D518000231242 /* URL+FailableCustomPersistable.swift */,
-			);
-			path = FailableCustomPersistable;
-			sourceTree = "<group>";
-		};
 		33054D3B299E0E6400231242 /* helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,7 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				33C0C9C929C22E91005ABD50 /* APIService+mock.swift */,
-				33526E6E299E743D008A6A91 /* NewsDisplayModel+mock.swift */,
 				33C0C9CB29C22EE1005ABD50 /* News+mock.swift */,
 			);
 			path = mock;
@@ -642,6 +625,31 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		33C0C9CE29C269F3005ABD50 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				33054D1A299D20AB00231242 /* NewsDetailsView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		33C0C9CF29C269F7005ABD50 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				33054D1C299D20EE00231242 /* NewsDetailsViewController.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		33C0C9D029C269FC005ABD50 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				33054D1E299D20F400231242 /* NewsDetailsViewModel.swift */,
+				33054D20299D20FC00231242 /* NewsDetailsViewModelProtocol.swift */,
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -661,7 +669,6 @@
 			name = "breaking-news-ios";
 			packageProductDependencies = (
 				33054CD2299C231700231242 /* EverythingAtOnce */,
-				33054CDB299C260000231242 /* RealmSwift */,
 				33054CEC299C2C7400231242 /* Kingfisher */,
 				33054CF1299CD99C00231242 /* SkeletonView */,
 				33054CF4299CDAB800231242 /* Moya */,
@@ -699,7 +706,6 @@
 			mainGroup = 33054CA5299C1EB900231242;
 			packageReferences = (
 				33054CD1299C231700231242 /* XCRemoteSwiftPackageReference "everything-at-once" */,
-				33054CDA299C260000231242 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				33054CEB299C2C7400231242 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				33054CF0299CD99C00231242 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				33054CF3299CDAB800231242 /* XCRemoteSwiftPackageReference "Moya" */,
@@ -791,7 +797,6 @@
 				33054D3A299D56E300231242 /* NewsSort.swift in Sources */,
 				33526E62299E6AD9008A6A91 /* NewsDisplayModel.swift in Sources */,
 				33054CE3299C268200231242 /* UIFont+bold.swift in Sources */,
-				33526E6F299E743D008A6A91 /* NewsDisplayModel+mock.swift in Sources */,
 				33054D49299E4B0D00231242 /* GoogleAuthenticationServiceProtocol.swift in Sources */,
 				33526E74299E7B68008A6A91 /* NewsListCell.swift in Sources */,
 				33054D1B299D20AB00231242 /* NewsDetailsView.swift in Sources */,
@@ -799,7 +804,6 @@
 				33054D3D299E0E7500231242 /* DateFormatters.swift in Sources */,
 				33054D2C299D258000231242 /* XCoordinator+transitions.swift in Sources */,
 				33054CD0299C222A00231242 /* BaseView.swift in Sources */,
-				33054D34299D518000231242 /* URL+FailableCustomPersistable.swift in Sources */,
 				33054D2F299D25EB00231242 /* Animation+fade.swift in Sources */,
 				33C0C9C729C21497005ABD50 /* NewsListViewModelState.swift in Sources */,
 				33054D21299D20FC00231242 /* NewsDetailsViewModelProtocol.swift in Sources */,
@@ -984,7 +988,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1018,7 +1022,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1065,14 +1069,6 @@
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		33054CDA299C260000231242 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
 			};
 		};
 		33054CEB299C2C7400231242 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -1130,11 +1126,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33054CD1299C231700231242 /* XCRemoteSwiftPackageReference "everything-at-once" */;
 			productName = EverythingAtOnce;
-		};
-		33054CDB299C260000231242 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 33054CDA299C260000231242 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		33054CEC299C2C7400231242 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

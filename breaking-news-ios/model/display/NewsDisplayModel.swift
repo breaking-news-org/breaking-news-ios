@@ -47,6 +47,23 @@ struct NewsDisplayModel {
 
 	let isPublished: Bool?
 
+	var relativeDateString: String {
+		switch DateDifference(between: .now, and: creationDate) {
+		case .lessThanMinute:
+			return "Recently"
+		case let .minutes(minutes):
+			return "\(minutes) minutes ago"
+		case let .hours(hours):
+			return "\(hours) hours ago"
+		case let .days(days):
+			return "\(days) days ago"
+		case let .months(months):
+			return "\(months) months ago"
+		case let .years(years):
+			return "\(years) years ago"
+		}
+	}
+
 	// MARK: Init
 
 	init(

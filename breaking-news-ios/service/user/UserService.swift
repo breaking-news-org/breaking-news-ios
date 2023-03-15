@@ -25,7 +25,6 @@
 
 import Foundation
 import Combine
-import SpicyWrap
 
 // MARK: - Service
 

@@ -23,19 +23,58 @@
 //  THE SOFTWARE.
 //  
 
-import UIKit
+import Foundation
+import Combine
+import XCoordinator
 import EverythingAtOnce
 
-// MARK: - View
+// MARK: - View model
 
-final class NewsDetailsView: BaseView {
+final class NewsDetailsViewModel: BaseViewModel, NewsDetailsViewModelProtocol {
 
-	// MARK: Subviews
+	// MARK: Exposed methods
 
-	// MARK: Override
+	var screenTitle: AnyPublisher<String, Never> {
+		return $_screenTitle
+			.removeDuplicates()
+			.eraseToAnyPublisher()
+	}
 
-	override func setupSubviewHierarchy() {
-		super.setupSubviewHierarchy()
+	var newsDisplayModel: AnyPublisher<NewsDisplayModel, Never> {
+		return $news
+			.map(NewsDisplayModel.init(from:))
+			.eraseToAnyPublisher()
+	}
+
+	// MARK: Private properties
+
+	@Published private var _screenTitle: String
+
+	@Published private var news: News
+
+	private let router: UnownedRouter<AppRoute>
+
+	// MARK: Init
+
+	init(
+		router: UnownedRouter<AppRoute>,
+		networkService: NetworkServiceProtocol,
+		news: News
+	) {
+		self._screenTitle = news.title
+		self.news = news
+		self.router = router
+		super.init(networkService: networkService)
+	}
+
+	// MARK: Exposed methods
+
+	func share() {
+		#warning("Implementation required.")
+	}
+
+	func back() {
+		router.trigger(.back)
 	}
 
 	// MARK: Private methods

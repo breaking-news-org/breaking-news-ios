@@ -24,37 +24,22 @@
 //  
 
 import Foundation
-import EverythingAtOnce
+import Combine
 
-#if DEBUG
-extension NewsDisplayModel {
+// MARK: - Protocol
 
-	struct MockParameters: OptionSet {
+protocol NewsDetailsViewModelProtocol: AnyObject {
 
-		let rawValue: Int
+	// MARK: Properties
 
-		static let images: MockParameters = MockParameters(rawValue: 1 << 1)
+	var screenTitle: AnyPublisher<String, Never> { get }
 
-		static let text: MockParameters = MockParameters(rawValue: 1 << 2)
+	var newsDisplayModel: AnyPublisher<NewsDisplayModel, Never> { get }
 
-		static let category: MockParameters = MockParameters(rawValue: 1 << 3)
+	// MARK: Methods
 
-		static let all: MockParameters = [.images, .text, .category]
+	func share()
 
-	}
-
-	static func randomMock(parameters: MockParameters = .all) -> NewsDisplayModel {
-		return NewsDisplayModel(
-			id: UUID().uuidString,
-			creator: Lorem.fullname,
-			creationDate: Date().addingTimeInterval(.random(in: -50_000...0)),
-			title: Lorem.shortSentence,
-			text: parameters.contains(.text) ? Lorem.paragraph : nil,
-			category: parameters.contains(.category) ? Lorem.word : nil,
-			imageUrls: parameters.contains(.images) ? [Picsum.random200x200(), Picsum.random200x200()] : [],
-			isPublished: [true, false, nil].randomElement()!
-		)
-	}
+	func back()
 
 }
-#endif

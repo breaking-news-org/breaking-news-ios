@@ -51,24 +51,28 @@ enum DateDifference {
 
 		if distance < 60 {
 			self = .lessThanMinute
+			return
 		} else {
 			distance /= 60
 		}
 
 		if distance < 60 {
 			self = .minutes(max(1, Int(distance)))
+			return
 		} else {
 			distance /= 60
 		}
 
 		if distance < 24 {
 			self = .hours(max(1, Int(distance)))
+			return
 		} else {
 			distance /= 24
 		}
 
 		if distance < 30 {
 			self = .months(max(1, Int(distance)))
+			return
 		} else {
 			distance /= 365
 		}

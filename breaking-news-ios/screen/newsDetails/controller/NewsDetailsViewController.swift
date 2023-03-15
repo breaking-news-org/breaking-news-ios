@@ -23,10 +23,57 @@
 //  THE SOFTWARE.
 //  
 
-import Foundation
+import UIKit
 
-// MARK: - Protocol
+// MARK: - Controller
 
-protocol NewsDetailsViewModelProtocol: AnyObject {
+final class NewsDetailsViewController: BaseViewController {
+
+	// MARK: Private properties
+
+	private let viewModel: NewsDetailsViewModelProtocol
+
+	private var contentView: NewsDetailsView! {
+		return view as? NewsDetailsView
+	}
+
+	// MARK: Init
+
+	init(viewModel: NewsDetailsViewModelProtocol) {
+		self.viewModel = viewModel
+		super.init()
+	}
+
+	// MARK: Lifecycle
+
+	override func loadView() {
+		view = NewsDetailsView(frame: .zero)
+	}
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		subscribeOnContentView()
+		subscribeOnViewModel()
+	}
+
+	// MARK: Private methods
+
+	private func subscribeOnContentView() {
+		disposeBag.collect {
+			contentView.didTapBack
+				.sink(receiveValue: viewModel.back)
+
+			contentView.didTapShare
+				.sink(receiveValue: viewModel.share)
+		}
+	}
+
+	private func subscribeOnViewModel() {
+		disposeBag.collect {
+			viewModel.newsDisplayModel
+				.receive(on: DispatchQueue.main)
+				.sink(receiveValue: contentView.set(newsDisplayModel:))
+		}
+	}
 
 }

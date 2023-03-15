@@ -135,22 +135,7 @@ final class NewsListCell: BaseTableViewCell {
 	func set(newsDisplayModel: NewsDisplayModel) {
 		titleLabel.text = newsDisplayModel.title
 		calendarDateLabel.text = DateFormatters.dayAndMonth.string(from: newsDisplayModel.creationDate)
-		clockDateLabel.text = {
-			switch DateDifference(between: .now, and: newsDisplayModel.creationDate) {
-			case .lessThanMinute:
-				return "Recently"
-			case let .minutes(minutes):
-				return "\(minutes) minutes ago"
-			case let .hours(hours):
-				return "\(hours) hours ago"
-			case let .days(days):
-				return "\(days) days ago"
-			case let .months(months):
-				return "\(months) months ago"
-			case let .years(years):
-				return "\(years) years ago"
-			}
-		}()
+		clockDateLabel.text = newsDisplayModel.relativeDateString
 		previewImageView.kf.setImage(
 			with: newsDisplayModel.imageUrls.first,
 			placeholder: Asset.Images.emptyImage.image

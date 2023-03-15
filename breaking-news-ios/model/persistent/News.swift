@@ -24,7 +24,6 @@
 //  
 
 import Foundation
-import RealmSwift
 
 // MARK: - Model
 
@@ -32,25 +31,34 @@ struct News {
 
 	// MARK: Persisted properties
 
-	var id: String
+	let id: String
 
-	var creator: String
+	let creator: String
 
-	var creationDate: Date
+	let creationDate: Date
 
-	var title: String
+	let title: String
 
-	var text: String?
+	let text: String?
 
-	var category: String?
+	let category: String?
 
-	var imageUrls: [URL]
+	let imageUrls: [URL]
 
-	var isPublished: Bool?
+	let isPublished: Bool?
 
 	// MARK: Init
 
-	init(id: String, creator: String, creationDate: Date, title: String, text: String? = nil, category: String? = nil, imageUrls: [URL], isPublished: Bool? = nil) {
+	init(
+		id: String,
+		creator: String,
+		creationDate: Date,
+		title: String,
+		text: String? = nil,
+		category: String? = nil,
+		imageUrls: [URL],
+		isPublished: Bool? = nil
+	) {
 		self.id = id
 		self.creator = creator
 		self.creationDate = creationDate
