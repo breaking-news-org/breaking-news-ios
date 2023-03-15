@@ -29,7 +29,7 @@ import Foundation
 
 enum Service {
 
-	static let api: APIServiceProtocol = APIService()
+	static let api: APIServiceProtocol = MockAPIService()
 
 	static let google: GoogleAuthenticationServiceProtocol = GoogleAuthenticationService(
 		clientId: "561405502649-15nt83qlrlrs7kq5isp4u50p11s288s5.apps.googleusercontent.com"

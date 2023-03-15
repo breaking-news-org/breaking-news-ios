@@ -34,14 +34,14 @@ enum APIEndpoint {
 
 	static var accessToken: String? = nil
 
-	static var baseUrl: URL = URL(string: "")!
+	static var baseUrl: URL = URL(string: "http://breaking-news.fun")!
 
 	// MARK: Cases
 
 	case newsList(
-		offsetLimit: OffsetLimit?,
-		sort: NewsSort?,
-		filters: Set<NewsFilter>
+		offsetLimit: OffsetLimit? = nil,
+		sort: NewsSort? = nil,
+		filters: Set<NewsFilter> = []
 	)
 
 }

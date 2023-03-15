@@ -24,26 +24,33 @@
 //  
 
 import Foundation
-import Combine
 
-// MARK: - Protocol
+// MARK: - Error
 
-protocol NewsListViewModelProtocol: AnyObject {
+/// Error that raises while working with the network API.
+public struct APIError: Error, Decodable {
 
-	// MARK: Properties
+	// MARK: Exposed properties
 
-	var state: AnyPublisher<NewsListScreenState, Never> { get }
+	/// Response status code.
+	public let code: Int
 
-	var news: AnyPublisher<[NewsDisplayModel], Never> { get }
+	/// Message to display.
+	public let message: String?
 
-	// MARK: Methods
+	/// Message to ispect by the developer.
+	public let debugMessage: String?
 
-	func openProfile()
+	// MARK: Init
 
-	func createNews()
-
-	func search(string: String)
-
-	func select(displayModel: NewsDisplayModel)
+	internal init(
+		code: Int,
+		message: String? = nil,
+		debugMessage: String? = nil
+	) {
+		self.code = code
+		self.message = message
+		self.debugMessage = debugMessage
+	}
 
 }

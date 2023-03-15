@@ -24,26 +24,38 @@
 //  
 
 import Foundation
-import Combine
+import RealmSwift
+import EverythingAtOnce
 
-// MARK: - Protocol
+// MARK: - Extension
 
-protocol NewsListViewModelProtocol: AnyObject {
+extension News {
 
-	// MARK: Properties
+	struct MockParameters: OptionSet {
 
-	var state: AnyPublisher<NewsListScreenState, Never> { get }
+		let rawValue: Int
 
-	var news: AnyPublisher<[NewsDisplayModel], Never> { get }
+		static let images: MockParameters = MockParameters(rawValue: 1 << 1)
 
-	// MARK: Methods
+		static let text: MockParameters = MockParameters(rawValue: 1 << 2)
 
-	func openProfile()
+		static let category: MockParameters = MockParameters(rawValue: 1 << 3)
 
-	func createNews()
+		static let all: MockParameters = [.images, .text, .category]
 
-	func search(string: String)
+	}
 
-	func select(displayModel: NewsDisplayModel)
+	static func randomMock(parameters: MockParameters = .all) -> News {
+		return News(
+			id: UUID().uuidString.lowercased(),
+			creator: Lorem.fullname,
+			creationDate: Date().addingTimeInterval(.random(in: -7_000...0)),
+			title: Lorem.sentence(ofLength: 5),
+			text: parameters.contains(.text) ? Lorem.paragraph : nil,
+			category: parameters.contains(.category) ? Lorem.word : nil,
+			imageUrls: parameters.contains(.images) ? [Picsum.random200x200(), Picsum.random200x200()] : [],
+			isPublished: [true, false, nil].randomElement()!
+		)
+	}
 
 }

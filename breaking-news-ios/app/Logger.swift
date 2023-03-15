@@ -23,19 +23,12 @@
 //  THE SOFTWARE.
 //  
 
-import Foundation
-import RealmSwift
+import EverythingAtOnce
 
-// MARK: - Protocol
-
-protocol DatabaseProtocol {
-
-	func objects<StoredObject: Object>(
-		of type: StoredObject.Type
-	) throws -> Results<StoredObject>
-
-	func writeOrUpdate<StoredObject: Object>(
-		object: StoredObject
-	) throws
-
-}
+/// Application logger.
+let log: LoggerProtocol = {
+	let defaultLogger = DefaultLogger()
+	defaultLogger.isEnabled = true
+	defaultLogger.addDestination(ConsoleDestination())
+	return defaultLogger
+}()

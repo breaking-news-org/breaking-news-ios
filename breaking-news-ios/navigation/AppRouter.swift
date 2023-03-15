@@ -28,10 +28,10 @@ import XCoordinator
 
 // MARK: - Route
 
-enum AppRoute: String, Route {
+enum AppRoute: Route {
 	case login
 	case newsList
-	case newsDetails
+	case newsDetails(news: News)
 	case back
 }
 

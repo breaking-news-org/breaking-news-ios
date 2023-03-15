@@ -31,6 +31,6 @@ enum DateFormats {
 
 	static let `default`: String = "yyyy-MM-dd'T'HH:mm:ss"
 
-	static let monthAndDay: String = "MMM d"
+	static let monthAndDay: String = "d MMM"
 
 }

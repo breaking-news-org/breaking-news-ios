@@ -46,6 +46,15 @@ final class GoogleAuthenticationService: GoogleAuthenticationServiceProtocol {
 
 	// MARK: Methods
 
+	@MainActor func signInOnCurrentViewController() async throws -> GoogleUser {
+		guard
+			let viewController = UIApplication.shared.topViewController
+		else {
+			throw ServiceError.noViewController
+		}
+		return try await signIn(onViewController: viewController)
+	}
+
 	@MainActor @discardableResult func signIn(
 		onViewController viewController: UIViewController
 	) async throws -> GoogleUser {
@@ -105,6 +114,8 @@ final class GoogleAuthenticationService: GoogleAuthenticationServiceProtocol {
 extension GoogleAuthenticationService {
 
 	enum ServiceError: UInt8, Error {
+
+		case noViewController
 
 		case noCliendIdFound
 

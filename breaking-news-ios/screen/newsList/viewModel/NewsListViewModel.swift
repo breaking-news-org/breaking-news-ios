@@ -26,6 +26,7 @@
 import Foundation
 import Combine
 import XCoordinator
+import EverythingAtOnce
 
 // MARK: - View model
 
@@ -33,8 +34,14 @@ final class NewsListViewModel: BaseViewModel, NewsListViewModelProtocol {
 
 	// MARK: Exposed properties
 
+	var state: AnyPublisher<NewsListScreenState, Never> {
+		return $screenState.removeDuplicates().eraseToAnyPublisher()
+	}
+
 	var news: AnyPublisher<[NewsDisplayModel], Never> {
-		return $newsModels.eraseToAnyPublisher()
+		return $newsModels
+			.map({ $0.map(NewsDisplayModel.init(from:)) })
+			.eraseToAnyPublisher()
 	}
 
 	// MARK: Private properties
@@ -43,24 +50,17 @@ final class NewsListViewModel: BaseViewModel, NewsListViewModelProtocol {
 
 	private let newsService: NewsServiceProtocol
 
-	@Published private var newsModels: [NewsDisplayModel] = [
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.images, .text]),
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.text, .category]),
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.text]),
-		.randomMock(parameters: [.images, .text]),
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.text, .category]),
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.text]),
-		.randomMock(parameters: [.images, .text]),
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.text, .category]),
-		.randomMock(parameters: .all),
-		.randomMock(parameters: [.text])
-	].sorted(by: \.creationDate, using: >)
+	private var searchTask: Task<Void, Error>? {
+		willSet {
+			searchTask?.cancel()
+		}
+	}
+
+	private var searchString: String = .emptyString
+
+	@Published private var screenState: NewsListScreenState = .normal
+
+	@Published private var newsModels: [News] = []
 
 	// MARK: Init
 
@@ -72,8 +72,47 @@ final class NewsListViewModel: BaseViewModel, NewsListViewModelProtocol {
 		self.router = router
 		self.newsService = newsService
 		super.init(networkService: networkService)
+
+		self.search(string: .emptyString)
 	}
 
 	// MARK: Exposed methods
+
+	func select(displayModel: NewsDisplayModel) {
+		guard
+			let news = newsModels.first(where: \.id == displayModel.id)
+		else {
+			return
+		}
+		router.trigger(.newsDetails(news: news))
+	}
+
+	func search(string: String) {
+		searchString = string
+		searchTask = Task {
+			let filteredNews: [News] = try await newsService.newsList(
+				filteredBy: [.titleContains(string)],
+				sortedBy: .creationDate
+			)
+
+			try Task.checkCancellation()
+
+			newsModels = filteredNews
+		}
+	}
+
+	func openProfile() {
+		Task {
+			try await Service.google.signInOnCurrentViewController()
+		}
+	}
+
+	func createNews() {
+		screenState = .loading
+		Task {
+			try await Task.sleep(nanoseconds: 3 * NSEC_PER_SEC)
+			screenState = .normal
+		}
+	}
 
 }

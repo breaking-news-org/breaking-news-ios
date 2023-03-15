@@ -29,4 +29,11 @@ import Foundation
 
 protocol NewsServiceProtocol {
 
+	// MARK: Methods
+
+	func newsList(
+		filteredBy filters: Set<NewsFilter>,
+		sortedBy sorting: NewsSort?
+	) async throws -> [News]
+
 }

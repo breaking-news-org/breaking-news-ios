@@ -60,17 +60,26 @@ final class NewsListViewController: BaseViewController {
 
 	private func subscribeOnContentView() {
 		disposeBag.collect {
+			contentView.searchString
+				.sink(receiveValue: viewModel.search(string:))
+
+			contentView.didTapCreateNews
+				.sink(receiveValue: viewModel.createNews)
+
 			contentView.didTapProfile
-				.sink {
-					Task {
-						try await Service.google.signIn(onViewController: self)
-					}
-				}
+				.sink(receiveValue: viewModel.openProfile)
+
+			contentView.didSelectDisplayModel
+				.sink(receiveValue: viewModel.select(displayModel:))
 		}
 	}
 
 	private func subscribeOnViewModel() {
 		disposeBag.collect {
+			viewModel.state
+				.receive(on: DispatchQueue.main)
+				.sink(receiveValue: contentView.set(state:))
+
 			viewModel.news
 				.receive(on: DispatchQueue.main)
 				.sink(receiveValue: contentView.set(newsDisplayModels:))

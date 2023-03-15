@@ -24,26 +24,11 @@
 //  
 
 import Foundation
-import Combine
 
-// MARK: - Protocol
+enum NewsListScreenState: Equatable {
 
-protocol NewsListViewModelProtocol: AnyObject {
+	case loading
 
-	// MARK: Properties
-
-	var state: AnyPublisher<NewsListScreenState, Never> { get }
-
-	var news: AnyPublisher<[NewsDisplayModel], Never> { get }
-
-	// MARK: Methods
-
-	func openProfile()
-
-	func createNews()
-
-	func search(string: String)
-
-	func select(displayModel: NewsDisplayModel)
+	case normal
 
 }

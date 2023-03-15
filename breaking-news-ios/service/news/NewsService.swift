@@ -39,4 +39,13 @@ final class NewsService: NewsServiceProtocol {
 		self.api = api
 	}
 
+	// MARK: Exposed methods
+
+	func newsList(
+		filteredBy filters: Set<NewsFilter>,
+		sortedBy sorting: NewsSort?
+	) async throws -> [News] {
+		return try await api.newsList(filteredBy: filters, sortedBy: sorting)
+	}
+
 }

@@ -29,6 +29,13 @@ import Foundation
 
 protocol APIServiceProtocol {
 
+	// MARK: Methods
+
 	func updateToken(_ token: String?)
+
+	func newsList(
+		filteredBy filters: Set<NewsFilter>,
+		sortedBy sort: NewsSort?
+	) async throws -> [News]
 
 }

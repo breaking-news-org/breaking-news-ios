@@ -28,25 +28,38 @@ import RealmSwift
 
 // MARK: - Model
 
-final class News: Object {
+struct News {
 
 	// MARK: Persisted properties
 
-	@Persisted(primaryKey: true) var id: String
+	var id: String
 
-	@Persisted var creator: String
+	var creator: String
 
-	@Persisted var creationDate: Date
+	var creationDate: Date
 
-	@Persisted var title: String
+	var title: String
 
-	@Persisted var text: String?
+	var text: String?
 
-	@Persisted var category: String?
+	var category: String?
 
-	@Persisted var imageUrls: List<URL>
+	var imageUrls: [URL]
 
-	@Persisted var isPublished: Bool?
+	var isPublished: Bool?
+
+	// MARK: Init
+
+	init(id: String, creator: String, creationDate: Date, title: String, text: String? = nil, category: String? = nil, imageUrls: [URL], isPublished: Bool? = nil) {
+		self.id = id
+		self.creator = creator
+		self.creationDate = creationDate
+		self.title = title
+		self.text = text
+		self.category = category
+		self.imageUrls = imageUrls
+		self.isPublished = isPublished
+	}
 
 }
 
@@ -65,9 +78,7 @@ extension News: Decodable {
 		case isPublished
 	}
 
-	convenience init(from decoder: Decoder) throws {
-		self.init()
-
+	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
 		self.id = try container.decode(String.self, forKey: .id)
@@ -81,8 +92,7 @@ extension News: Decodable {
 		self.creationDate = DateFormatters.utc.date(from: dateString)!
 
 		let imageUrlStrings: [String] = try container.decode([String].self, forKey: .imageUrls)
-		let imageUrls: [URL] = imageUrlStrings.compactMap(URL.init(string:))
-		self.imageUrls.append(objectsIn: imageUrls)
+		self.imageUrls = imageUrlStrings.compactMap(URL.init(string:))
 	}
 
 }

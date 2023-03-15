@@ -34,6 +34,7 @@ enum DateFormatters {
 		dateFormatter.dateFormat = DateFormats.monthAndDay
 		dateFormatter.calendar = .autoupdatingCurrent
 		dateFormatter.timeZone = .autoupdatingCurrent
+		dateFormatter.locale = Locale(identifier: "en_US")
 		return dateFormatter
 	}()
 

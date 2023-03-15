@@ -67,6 +67,11 @@ final class NewsListCell: BaseTableViewCell {
 
 	// MARK: Lifecycle
 
+	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		selectionStyle = .none
+	}
+
 	override func setupSubviewHierarchy() {
 		super.setupSubviewHierarchy()
 		contentView.addSubviews {
@@ -118,8 +123,8 @@ final class NewsListCell: BaseTableViewCell {
 			.withConstraints {
 				pinTop(toSuperview: .top, offset: 16)
 				pinBottom(toSuperview: .bottom, offset: -16)
-				pinLeading(toSuperview: .leading, offset: 30)
-				pinTrailing(toSuperview: .trailing, offset: -30)
+				pinLeading(toSuperview: .leading, offset: 20)
+				pinTrailing(toSuperview: .trailing, offset: -20)
 				pinHeight(to: 67)
 			}
 		}
@@ -128,7 +133,6 @@ final class NewsListCell: BaseTableViewCell {
 	// MARK: Exposed methods
 
 	func set(newsDisplayModel: NewsDisplayModel) {
-		previewImageView.kf.setImage(with: newsDisplayModel.imageUrls.first)
 		titleLabel.text = newsDisplayModel.title
 		calendarDateLabel.text = DateFormatters.dayAndMonth.string(from: newsDisplayModel.creationDate)
 		clockDateLabel.text = {
@@ -136,17 +140,21 @@ final class NewsListCell: BaseTableViewCell {
 			case .lessThanMinute:
 				return "Recently"
 			case let .minutes(minutes):
-				return "\(minutes) minutes"
+				return "\(minutes) minutes ago"
 			case let .hours(hours):
-				return "\(hours) hours"
+				return "\(hours) hours ago"
 			case let .days(days):
-				return "\(days) days"
+				return "\(days) days ago"
 			case let .months(months):
-				return "\(months) months"
+				return "\(months) months ago"
 			case let .years(years):
-				return "\(years) years"
+				return "\(years) years ago"
 			}
 		}()
+		previewImageView.kf.setImage(
+			with: newsDisplayModel.imageUrls.first,
+			placeholder: Asset.Images.emptyImage.image
+		)
 	}
 
 }

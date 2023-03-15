@@ -34,6 +34,9 @@ protocol GoogleAuthenticationServiceProtocol: AnyObject {
 	var currentUser: GoogleUser? { get }
 
 	/// Perform sign in with Google.
+	@discardableResult func signInOnCurrentViewController() async throws -> GoogleUser
+
+	/// Perform sign in with Google.
 	@discardableResult func signIn(
 		onViewController viewController: UIViewController
 	) async throws -> GoogleUser

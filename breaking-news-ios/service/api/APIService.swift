@@ -25,6 +25,7 @@
 
 import Foundation
 import Moya
+import EverythingAtOnce
 
 // MARK: - Service
 
@@ -38,7 +39,11 @@ final class APIService: APIServiceProtocol {
 
 	init() {
 		let configuration = NetworkLoggerPlugin.Configuration(
-			logOptions: [
+			output: { _, items in
+				items.forEach { item in
+					log.verbose(item)
+				}
+			}, logOptions: [
 				.requestMethod, .requestBody,
 				.successResponseBody, .errorResponseBody
 			]
@@ -52,8 +57,58 @@ final class APIService: APIServiceProtocol {
 
 	func updateToken(_ token: String?) {
 		APIEndpoint.accessToken = token
+		log.info("Access token has been set to \(token ?? "nil") in the API service.")
+	}
+
+	func newsList(
+		filteredBy filters: Set<NewsFilter>,
+		sortedBy sort: NewsSort?
+	) async throws -> [News] {
+		let endpoint: APIEndpoint = .newsList(
+			offsetLimit: nil,
+			sort: sort,
+			filters: filters
+		)
+		return try await request(endpoint, decode: [News].self)
 	}
 
 	// MARK: Private methods
+
+	@discardableResult private static func process<ResponseBody: Decodable>(
+		result: Result<Response, MoyaError>,
+		decodeBody: ResponseBody.Type,
+		allowCodes allowedCodes: Set<Int>
+	) throws -> ResponseBody {
+		switch result {
+		case let .success(response):
+			if allowedCodes.contains(response.statusCode) {
+				return try JSONDecoder().decode(decodeBody.self, from: response.data)
+			} else {
+				throw APIError(code: response.statusCode)
+			}
+		case let .failure(error):
+			throw error
+		}
+	}
+
+	@discardableResult private func request<ResponseBody: Decodable>(
+		_ endpoint: APIEndpoint,
+		decode decodeBody: ResponseBody.Type
+	) async throws -> ResponseBody {
+		return try await withCheckedThrowingContinuation { continuation in
+			provider.request(endpoint) { response in
+				do {
+					let responseBody = try APIService.process(
+						result: response,
+						decodeBody: decodeBody.self,
+						allowCodes: [200]
+					)
+					continuation.resume(returning: responseBody)
+				} catch let error {
+					continuation.resume(throwing: error)
+				}
+			}
+		}
+	}
 
 }

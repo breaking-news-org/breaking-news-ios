@@ -24,59 +24,9 @@
 //  
 
 import Foundation
-import RealmSwift
 
-// MARK: - Database
+struct NewsListResponse: Decodable {
 
-final class Database: DatabaseProtocol {
-
-	// MARK: Private properties
-
-	private let schemaVersion: UInt64 = 1
-
-	private let realmConfiguration: Realm.Configuration
-
-	// MARK: Init/deinit
-
-	init() {
-		self.realmConfiguration = .defaultConfiguration
-	}
-
-	// MARK: Utils
-
-	func databaseFileSize() -> UInt64? {
-		guard
-			let path = realmConfiguration.fileURL?.relativePath,
-			let attributes = try? FileManager.default.attributesOfItem(atPath: path),
-			let fileSize = attributes[FileAttributeKey.size] as? UInt64
-		else {
-			return nil
-		}
-		return fileSize
-	}
-
-	// MARK: Realm instance
-
-	func realmInstance() throws -> Realm {
-		return try Realm(configuration: realmConfiguration)
-	}
-
-	func unsafeRealmInstance() -> Realm {
-		return try! realmInstance()
-	}
-
-	// MARK: Interface
-
-	func objects<StoredObject: Object>(
-		of type: StoredObject.Type
-	) throws -> Results<StoredObject> {
-		return try realmInstance().objects(StoredObject.self)
-	}
-
-	func writeOrUpdate<StoredObject: Object>(
-		object: StoredObject
-	) throws {
-
-	}
+	var news: [News]
 
 }

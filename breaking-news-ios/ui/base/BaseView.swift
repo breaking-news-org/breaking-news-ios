@@ -25,6 +25,7 @@
 
 import UIKit
 import Combine
+import EverythingAtOnce
 
 // MARK: - View
 
@@ -43,6 +44,7 @@ class BaseView: UIView {
 		backgroundColor = .clear
 		setupSubviewHierarchy()
 		setupSubviewBindings()
+		makeAccessibilityIdentifiersForChildren()
 	}
 
 	@available(*, unavailable)
