@@ -2,7 +2,7 @@
 //
 //  MIT License
 //
-//  Copyright (c) 2023-Present
+//  Copyright (c) 2023-Present BreakingNews
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -31,16 +31,25 @@ protocol UserServiceProtocol: AnyObject {
 
 	// MARK: Properties
 
-	var accessToken: String? { get }
+	var isAuthorized: Bool { get }
 
-	var isLoggedIn: Bool { get }
-
-	var avatarUrl: URL? { get }
+	var nickname: String? { get }
 
 	// MARK: Methods
 
-	func logIn() async throws
+	func register(
+		nickname: String,
+		username: String,
+		password: String
+	) async throws
+
+	func logIn(
+		username: String,
+		password: String
+	) async throws
 
 	func logOut() async throws
+
+	func refreshUserSession() async throws
 
 }

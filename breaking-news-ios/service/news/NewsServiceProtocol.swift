@@ -2,7 +2,7 @@
 //
 //  MIT License
 //
-//  Copyright (c) 2023-Present
+//  Copyright (c) 2023-Present BreakingNews
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -27,13 +27,16 @@ import Foundation
 
 // MARK: - Protocol
 
-protocol NewsServiceProtocol {
+protocol NewsServiceProtocol: AnyObject {
 
 	// MARK: Methods
 
-	func newsList(
-		filteredBy filters: Set<NewsFilter>,
-		sortedBy sorting: NewsSort?
-	) async throws -> [News]
+	func news() async throws -> [NewsArticle]
+
+	func createArticle(
+		title: String,
+		text: String,
+		imagesData: [Data]
+	) async throws
 
 }

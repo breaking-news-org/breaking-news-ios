@@ -1,13 +1,13 @@
 xcassets:
   inputs: 
-    - breaking-news-ios/content/Colors.xcassets
-    - breaking-news-ios/content/Images.xcassets
+    - breaking-news-ios/resources/Colors.xcassets
+    - breaking-news-ios/resources/Images.xcassets
   outputs:
     templateName: swift5
-    output: breaking-news-ios/content/generated/Assets.swift
+    output: breaking-news-ios/resources/generated/Assets.swift
 
 fonts:
-  inputs: breaking-news-ios/content/font
+  inputs: breaking-news-ios/resources/font
   outputs:
     templateName: swift5
-    output: breaking-news-ios/content/generated/Fonts.swift
+    output: breaking-news-ios/resources/generated/Fonts.swift

@@ -2,7 +2,7 @@
 //
 //  MIT License
 //
-//  Copyright (c) 2023-Present
+//  Copyright (c) 2023-Present BreakingNews
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 //  
 
 import Foundation
-import Combine
+import Dependencies
 
 // MARK: - Service
 
@@ -32,42 +32,111 @@ final class UserService: UserServiceProtocol {
 
 	// MARK: Exposed properties
 
-	private(set) var accessToken: String?
-
-	var isLoggedIn: Bool {
-		return accessToken.isNotNil
+	var isAuthorized: Bool {
+		return encryptedStorage.accessToken != nil
 	}
 
-	var avatarUrl: URL? {
-		return google.currentUser?.avatarUrl
+	var nickname: String? {
+		return encryptedStorage.nickname
 	}
 
 	// MARK: Private properties
 
-	private var disposeBag: Set<AnyCancellable> = []
+	@Dependency(\.apiService) private var apiService: APIServiceProtocol
 
-	private let google: GoogleAuthenticationServiceProtocol
-
-	private let api: APIServiceProtocol
+	@Dependency(\.encryptedStorage) private var encryptedStorage: EncryptedStorageProtocol
 
 	// MARK: Init
 
-	init(
-		api: APIServiceProtocol,
-		google: GoogleAuthenticationServiceProtocol
-	) {
-		self.google = google
-		self.api = api
+	init() {
+
+	}
+
+	deinit {
+		NotificationCenter.default.removeObserver(self)
 	}
 
 	// MARK: Exposed methods
 
-	func logIn() async throws {
+	func logIn(username: String, password: String) async throws {
+		do {
+			let request = LoginRequest(
+				username: username,
+				password: password
+			)
+			let response = try await apiService.login(
+				request: request
+			)
 
+			encryptedStorage.nickname = nickname
+
+			handleAfterAuthorization(
+				accessToken: response.accessToken,
+				refreshToken: response.refreshToken
+			)
+		} catch let error {
+			throw error
+		}
+	}
+
+	func register(nickname: String, username: String, password: String) async throws {
+		do {
+			let request = RegisterRequest(
+				nickname: nickname,
+				username: username,
+				password: password
+			)
+			let response = try await apiService.register(
+				request: request
+			)
+
+			encryptedStorage.nickname = nickname
+
+			handleAfterAuthorization(
+				accessToken: response.accessToken,
+				refreshToken: response.refreshToken
+			)
+		} catch let error {
+			throw error
+		}
 	}
 
 	func logOut() async throws {
+		encryptedStorage.refreshToken = nil
+		encryptedStorage.accessToken = nil
 
+		NotificationCenter.default.post(
+			name: .didChangeAuthorizationStatus,
+			object: nil
+		)
+	}
+
+	func refreshUserSession() async throws {
+		do {
+			let response = try await apiService.rotateRefreshToken()
+			handleAfterAuthorization(
+				accessToken: response.accessToken,
+				refreshToken: response.refreshToken
+			)
+		} catch {
+			try await logOut()
+		}
+	}
+
+	// MARK: Private properties
+
+	private func handleAfterAuthorization(
+		accessToken: String,
+		refreshToken: String
+	) {
+		encryptedStorage.accessToken = accessToken
+		encryptedStorage.refreshToken = refreshToken
+		encryptedStorage.nickname = nickname
+
+		NotificationCenter.default.post(
+			name: .didChangeAuthorizationStatus,
+			object: nil
+		)
 	}
 
 }

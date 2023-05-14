@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  breaking-news-ios
+
+  Created by Roman Nabiullin on 09.05.2023.
+  
+*/
+
+// MARK: Authorization
+
+"screen.auth.title" = "Breaking news!";
+
+"screen.auth.login.subtitle" = "Log in into an existing account";
+"screen.auth.login.switch.segment.title" = "Log in";
+"screen.auth.login.button.title" = "Log in";
+
+"screen.auth.register.subtitle" = "Create new account";
+"screen.auth.register.switch.segment.title" = "Register";
+"screen.auth.register.button.title" = "Register";

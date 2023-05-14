@@ -2,7 +2,7 @@
 //
 //  MIT License
 //
-//  Copyright (c) 2023-Present
+//  Copyright (c) 2023-Present BreakingNews
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -27,15 +27,24 @@ import Foundation
 
 // MARK: - Protocol
 
-protocol APIServiceProtocol {
+protocol APIServiceProtocol: AnyObject {
 
-	// MARK: Methods
+	// MARK: Exposed methods
 
-	func updateToken(_ token: String?)
+	// News
 
-	func newsList(
-		filteredBy filters: Set<NewsFilter>,
-		sortedBy sort: NewsSort?
-	) async throws -> [News]
+	func news(
+		queryParameters: Set<NewsRequestQueryParamter>
+	) async throws -> [NewsArticleResponse]
+
+	func createArticle(request: CreateArticleRequest) async throws
+
+	// Authorization
+
+	func login(request: LoginRequest) async throws -> LoginResponse
+
+	func register(request: RegisterRequest) async throws -> RegisterResponse
+
+	func rotateRefreshToken() async throws -> RotateRefreshTokenResponse
 
 }

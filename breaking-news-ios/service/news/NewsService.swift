@@ -2,7 +2,7 @@
 //
 //  MIT License
 //
-//  Copyright (c) 2023-Present
+//  Copyright (c) 2023-Present BreakingNews
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@
 //  
 
 import Foundation
+import Dependencies
 
 // MARK: - Service
 
@@ -31,21 +32,30 @@ final class NewsService: NewsServiceProtocol {
 
 	// MARK: Private properties
 
-	private let api: APIServiceProtocol
-
-	// MARK: Init
-
-	init(api: APIServiceProtocol) {
-		self.api = api
-	}
+	@Dependency(\.apiService) private var apiService: APIServiceProtocol
 
 	// MARK: Exposed methods
 
-	func newsList(
-		filteredBy filters: Set<NewsFilter>,
-		sortedBy sorting: NewsSort?
-	) async throws -> [News] {
-		return try await api.newsList(filteredBy: filters, sortedBy: sorting)
+	func createArticle(
+		title: String,
+		text: String,
+		imagesData: [Data]
+	) async throws {
+		let request = CreateArticleRequest(
+			title: title,
+			content: text,
+			images: imagesData.compactMap({ $0.base64EncodedString()}),
+			category: 1,
+			isPublished: true
+		)
+		try await apiService.createArticle(request: request)
+	}
+
+	func news() async throws -> [NewsArticle] {
+		return try await apiService
+			.news(queryParameters: [.page(pageNumber: 0)])
+			.map(NewsArticle.init(from:))
+			.sorted(by: \.creationDate, using: >)
 	}
 
 }

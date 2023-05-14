@@ -2,7 +2,7 @@
 //
 //  MIT License
 //
-//  Copyright (c) 2023-Present
+//  Copyright (c) 2023-Present BreakingNews
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,8 @@
 
 import Foundation
 import Moya
-import EverythingAtOnce
+import Alamofire
+import Dependencies
 
 // MARK: - Service
 
@@ -33,12 +34,14 @@ final class APIService: APIServiceProtocol {
 
 	// MARK: Private properties
 
-	private let provider: MoyaProvider<APIEndpoint>
+	@Dependency(\.encryptedStorage) private var encryptedStorage: EncryptedStorageProtocol
+
+	private var provider: MoyaProvider<Endpoint>!
 
 	// MARK: Init
 
 	init() {
-		let configuration = NetworkLoggerPlugin.Configuration(
+		let networkLoggerCongifuration = NetworkLoggerPlugin.Configuration(
 			output: { _, items in
 				items.forEach { item in
 					log.verbose(item)
@@ -48,66 +51,217 @@ final class APIService: APIServiceProtocol {
 				.successResponseBody, .errorResponseBody
 			]
 		)
-		let loggerPlugin = NetworkLoggerPlugin(configuration: configuration)
+		let networkLoggerPlugin = NetworkLoggerPlugin(
+			configuration: networkLoggerCongifuration
+		)
 
-		self.provider = MoyaProvider<APIEndpoint>(plugins: [loggerPlugin])
+		let accessTokenPlugin = AccessTokenPlugin(tokenClosure: { [weak self] _ in
+			if let accessToken = self?.encryptedStorage.accessToken {
+				return accessToken
+			} else {
+				return ""
+			}
+		})
+
+		self.provider = MoyaProvider(plugins: [
+			accessTokenPlugin,
+			networkLoggerPlugin
+		])
 	}
 
 	// MARK: Exposed methods
 
-	func updateToken(_ token: String?) {
-		APIEndpoint.accessToken = token
-		log.info("Access token has been set to \(token ?? "nil") in the API service.")
+	func createArticle(request: CreateArticleRequest) async throws {
+		_ = try await requestAndRotateTokenIfNeeded(
+			.createArticle(requestBody: request),
+			decoding: Empty.self
+		)
 	}
 
-	func newsList(
-		filteredBy filters: Set<NewsFilter>,
-		sortedBy sort: NewsSort?
-	) async throws -> [News] {
-		let endpoint: APIEndpoint = .newsList(
-			offsetLimit: nil,
-			sort: sort,
-			filters: filters
+	func news(queryParameters: Set<NewsRequestQueryParamter>) async throws -> [NewsArticleResponse] {
+		return try await requestAndRotateTokenIfNeeded(
+			.news(queryParameters: queryParameters),
+			decoding: [NewsArticleResponse].self
 		)
-		return try await request(endpoint, decode: [News].self)
+	}
+
+	func login(request: LoginRequest) async throws -> LoginResponse {
+		return try await provider.request(
+			.login(requestBody: request),
+			decoding: LoginResponse.self
+		)
+	}
+
+	func register(request: RegisterRequest) async throws -> RegisterResponse {
+		return try await provider.request(
+			.register(requestBody: request),
+			decoding: RegisterResponse.self
+		)
+	}
+
+	func rotateRefreshToken() async throws -> RotateRefreshTokenResponse {
+		let response = try await provider.request(
+			.rotateRefreshToken,
+			decoding: RotateRefreshTokenResponse.self
+		)
+		encryptedStorage.accessToken = response.accessToken
+		encryptedStorage.refreshToken = response.refreshToken
+		return response
 	}
 
 	// MARK: Private methods
 
-	@discardableResult private static func process<ResponseBody: Decodable>(
-		result: Result<Response, MoyaError>,
-		decodeBody: ResponseBody.Type,
-		allowCodes allowedCodes: Set<Int>
-	) throws -> ResponseBody {
-		switch result {
-		case let .success(response):
-			if allowedCodes.contains(response.statusCode) {
-				return try JSONDecoder().decode(decodeBody.self, from: response.data)
-			} else {
-				throw APIError(code: response.statusCode)
-			}
-		case let .failure(error):
-			throw error
-		}
+	/// Async moya request to decode a json body.
+	fileprivate func requestAndRotateTokenIfNeeded<ResponseBody: Decodable>(
+		_ endpoint: Endpoint,
+		decoding responseBodyType: ResponseBody.Type
+	) async throws -> ResponseBody {
+		return try await provider.request(endpoint, decoding: ResponseBody.self)
+//		do {
+//			return try await provider.request(endpoint, decoding: ResponseBody.self)
+//		} catch {
+//			_ = try await rotateRefreshToken()
+//			return try await provider.request(endpoint, decoding: ResponseBody.self)
+//		}
 	}
 
-	@discardableResult private func request<ResponseBody: Decodable>(
-		_ endpoint: APIEndpoint,
-		decode decodeBody: ResponseBody.Type
-	) async throws -> ResponseBody {
-		return try await withCheckedThrowingContinuation { continuation in
-			provider.request(endpoint) { response in
+}
+
+// MARK: - Endpoint
+
+extension APIService {
+
+	fileprivate enum Endpoint: TargetType, AccessTokenAuthorizable {
+
+		// MARK: Cases
+
+		case rotateRefreshToken
+
+		case news(queryParameters: Set<NewsRequestQueryParamter>)
+
+		case createArticle(requestBody: CreateArticleRequest)
+
+		case login(requestBody: LoginRequest)
+
+		case register(requestBody: RegisterRequest)
+
+		// MARK: Exposed properties
+
+		fileprivate(set) static var baseUrl: URL = URL(string: "http://breaking-news.fun:30006")!
+
+		var baseURL: URL {
+			return Endpoint.baseUrl
+		}
+
+		var headers: [String: String]? {
+			return [
+				"Accept": "application/json;charset=utf-8",
+				"Content-Type": "application/json;charset=utf-8"
+			]
+		}
+
+		var authorizationType: AuthorizationType? {
+			switch self {
+			case .login, .register:
+				return .none
+			case .news, .rotateRefreshToken, .createArticle:
+				return .bearer
+			}
+		}
+
+		var path: String {
+			switch self {
+			case .news:
+				return "/api1/news/get"
+			case .login:
+				return "/api1/user/login"
+			case .register:
+				return "/api1/user/register"
+			case .createArticle:
+				return "/api1/news/create"
+			case .rotateRefreshToken:
+				return "/api1/user/rotate-refresh-token"
+			}
+		}
+
+		var method: Moya.Method {
+			switch self {
+			case .news:
+				return .get
+			case .login, .register, .rotateRefreshToken, .createArticle:
+				return .post
+			}
+		}
+
+		var task: Moya.Task {
+			switch self {
+			case .rotateRefreshToken:
+				return .requestPlain
+			case let .login(requestBody):
+				return .requestJSONEncodable(requestBody)
+			case let .register(requestBody):
+				return .requestJSONEncodable(requestBody)
+			case let .createArticle(requestBody):
+				return .requestJSONEncodable(requestBody)
+			case let .news(queryParameters):
+				let parameterDictionary = Dictionary(
+					queryParameters.map(\.paramterPair),
+					uniquingKeysWith: { _, new in new }
+				)
+				return .requestParameters(
+					parameters: parameterDictionary,
+					encoding: URLEncoding(destination: .queryString)
+				)
+			}
+		}
+
+	}
+
+}
+
+// MARK: - Moya+async
+
+extension MoyaProvider {
+
+	/// Async version of default moya request. Uses default queue for callbacks.
+	private func request(_ target: Target, progress: ProgressBlock? = nil) async throws -> Response {
+		return try await withUnsafeThrowingContinuation { continuation in
+			request(target, progress: progress, completion: { result in
 				do {
-					let responseBody = try APIService.process(
-						result: response,
-						decodeBody: decodeBody.self,
-						allowCodes: [200]
-					)
-					continuation.resume(returning: responseBody)
+					try _Concurrency.Task.checkCancellation()
+					continuation.resume(with: result)
 				} catch let error {
 					continuation.resume(throwing: error)
 				}
+			})
+		}
+	}
+
+	/// Async moya request to decode a json body.
+	fileprivate func request<ResponseBody: Decodable>(
+		_ target: Target,
+		decoding responseBodyType: ResponseBody.Type,
+		progress: ProgressBlock? = nil
+	) async throws -> ResponseBody {
+		let response = try await request(target, progress: progress)
+
+		if let decodedBody = try? JSONDecoder().decode(
+			ResponseBody.self,
+			from: response.data
+		) {
+			return decodedBody
+		} else if let decodedBody = try? JSONDecoder().decode(
+			APIResponse<APIError, ResponseBody>.self,
+			from: response.data
+		) {
+			switch decodedBody {
+			case let .right(body):
+				return body
+			case let .left(error):
+				throw error
 			}
+		} else {
+			throw APIError.unknown
 		}
 	}
 
